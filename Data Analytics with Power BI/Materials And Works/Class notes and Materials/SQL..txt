@@ -1,0 +1,114 @@
+1.what commnad retrieves the "Entity" and "Year" columns from the "world food production" table for the year 1987?
+
+SELECT "Entity", "Year"
+FROM "world food production"
+WHERE "Year"='1987';
+
+
+2.what command retrieves all columns from the "world food production" table for years starting from 1980 and onwards?
+
+SELECT * 
+FROM "world food production"
+WHERE "Year" >=1980
+
+
+3.what command retrieves all columns from the "world food production" table where the "Maize Production (tonnes)" column contains specific values (752000 or 494000)?
+
+SELECT * 
+from "world food production"
+WHERE  "Maize Production (tonnes)" IN ('752000', '494000');
+
+
+4.what command retrieves all columns from the "world food production" table where the "Rice Production (tonnes)" column starts with the value 17714?
+
+SELECT *
+FROM "world food production"
+WHERE  "Rice  Production ( tonnes)" ::text LIKE '17714%';
+
+
+5.what command retrieves all columns from the "world food production" table where the "Yams Production (tonnes)" column falls within the range 0 to 15?
+
+
+SELECT * 
+FROM "world food production"
+WHERE "Yams  Production (tonnes)" >=0 AND "Yams  Production (tonnes)" <=15;
+
+
+
+
+
+6.what command retrieves all columns from the "world food production" table where the "Wheat Production (tonnes)" column falls within the range 1655 to 2000?
+
+
+SELECT * 
+FROM "world food production"
+WHERE "Wheat Production (tonnes)" BETWEEN '1655' AND '2000'
+
+
+7.what command retrieves all columns from the "world food production" table where the "Yams Production (tonnes)" column is NULL?
+
+
+SELECT * 
+FROM "world food production"
+WHERE "Yams  Production (tonnes)" IS NULL;
+
+
+8.  what command retrieves distinct values of the "Year" column from the "world food production" table?
+
+
+
+SELECT DISTINCT "Year"
+FROM "world food production"; 
+
+
+
+
+9. what command retrieves all columns from the "world food production" table where the "Tea Production (tonnes)" column has a value of 316 and the "Sweet potatoes Production (tonnes)" column has a value greater than or equal to 128?
+
+
+
+
+SELECT *
+FROM "world food production"
+WHERE "Tea  Production ( tonnes )" = '316' AND "Sweet potatoes  Production (tonnes)" >='128';
+
+
+
+10.  what command retrieves the "Entity" column and calculates the total sugar cane production (summing up the "Sugar cane Production (tonnes)" column) from the "world food production" table for each entity. It only includes entities with a total sugar cane production greater than 1000?
+
+
+
+
+SELECT "Entity", SUM("Sugar cane Production (tonnes)") AS total_sugar_cane_production
+FROM "world food production"
+GROUP BY "Entity"
+HAVING SUM("Sugar cane Production (tonnes)") > 1000;
+
+
+
+11.what  command retrieves the "Year" column from the "world food production" table and categorizes each year as "Future Year", "Past Year", or "Current Year" based on their relation to the year 2020?
+
+
+
+SELECT "Year",
+       CASE 
+           WHEN "Year" > 2020 THEN 'Future Year'
+           WHEN "Year" < 2020 THEN 'Past Year'
+           ELSE 'Current Year'
+       END AS year_category
+FROM "world food production";
+
+
+
+12.what   command retrieves the "Year", "Entity", and "Apples Production (tonnes)" columns from the "world food production" table. It then calculates the cumulative production of apples for each entity over different years?
+
+
+
+
+SELECT "Year", "Entity", "Apples Production (tonnes)",
+       SUM("Apples Production (tonnes)") OVER (PARTITION BY "Year" ORDER BY "Entity") AS cumulative_production
+FROM (
+    SELECT "Year", "Entity", "Apples Production (tonnes)"
+    FROM "world food production"
+) AS subquery_alias;
+

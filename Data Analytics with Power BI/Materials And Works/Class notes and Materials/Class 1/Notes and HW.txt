@@ -1,0 +1,16 @@
+Data Analysis  -> Python, SQL, Intro to Big Data
+ 
+How Web Browser Works?
+Rokomari LAyout?
+Website-> database->place order-> order confirmation->payment option-> Wait for the pacage to araive -> Collect pacgage review
+Flowchart of a Digital website 
+1. Foodpanda
+2. amazon
+3. Rokomari
+
+what type of data being generated?
+Latter from a father to his daughter- Book Collect
+hakush pakush er programming sikkha
+
+
+Pandas, Seahorn, sql intro
